@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#11151c">
+  <title>JSON UI Mobile Forge — V1</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <header class="topbar">
+      <div class="brand">
+        <button id="menuBtn" class="icon-btn mobile-only" aria-label="Menu">☰</button>
+        <div class="brand-mark">JF</div>
+        <div>
+          <strong>JSON UI Mobile Forge</strong>
+          <small>V1 • Bedrock JSON UI editor</small>
+        </div>
+      </div>
+      <div class="top-actions">
+        <button id="newBtn" class="toolbar-btn">New</button>
+        <button id="importBtn" class="toolbar-btn">Import JSON</button>
+        <button id="exportBtn" class="toolbar-btn primary">Export JSON</button>
+        <button id="saveBtn" class="toolbar-btn">Save</button>
+      </div>
+    </header>
+
+    <main class="workspace">
+      <aside id="leftPanel" class="panel left-panel">
+        <div class="panel-tabs">
+          <button class="tab active" data-left-tab="toolbox">Toolbox</button>
+          <button class="tab" data-left-tab="hierarchy">Hierarchy</button>
+        </div>
+
+        <section id="toolboxTab" class="tab-content active">
+          <div class="section-title">Elements</div>
+          <div class="element-grid" id="toolbox"></div>
+          <div class="help-card">
+            <b>Tip</b>
+            <span>Tap an element to add it inside the selected parent.</span>
+          </div>
+        </section>
+
+        <section id="hierarchyTab" class="tab-content">
+          <div class="tree-toolbar">
+            <input id="treeSearch" type="search" placeholder="Search elements...">
+          </div>
+          <div id="tree" class="tree"></div>
+        </section>
+      </aside>
+
+      <section class="canvas-panel">
+        <div class="canvas-toolbar">
+          <div class="toolbar-group">
+            <button id="selectTool" class="tool active">Select</button>
+            <button id="panTool" class="tool">Pan</button>
+          </div>
+          <div class="toolbar-group">
+            <label>Screen
+              <select id="screenPreset">
+                <option value="384x216">384 × 216</option>
+                <option value="427x240">427 × 240</option>
+                <option value="520x240">520 × 240</option>
+                <option value="320x240">320 × 240</option>
+              </select>
+            </label>
+            <label>Zoom
+              <input id="zoomRange" type="range" min="50" max="250" value="150">
+            </label>
+            <button id="gridBtn" class="tool active">Grid</button>
+            <button id="previewBtn" class="tool">Preview</button>
+          </div>
+        </div>
+
+        <div id="canvasViewport" class="canvas-viewport">
+          <div id="canvasStage" class="canvas-stage">
+            <div id="uiCanvas" class="ui-canvas grid-on"></div>
+          </div>
+        </div>
+
+        <div class="statusbar">
+          <span id="statusText">Ready</span>
+          <span id="coordsText">x: 0 y: 0</span>
+          <span id="zoomText">150%</span>
+        </div>
+      </section>
+
+      <aside id="rightPanel" class="panel right-panel">
+        <div class="panel-tabs">
+          <button class="tab active" data-right-tab="properties">Properties</button>
+          <button class="tab" data-right-tab="json">JSON</button>
+        </div>
+
+        <section id="propertiesTab" class="tab-content active">
+          <div id="propertiesEmpty" class="empty-state">
+            <div class="empty-icon">⌁</div>
+            <b>No element selected</b>
+            <span>Select an element on the canvas or hierarchy.</span>
+          </div>
+          <div id="properties" class="properties hidden"></div>
+        </section>
+
+        <section id="jsonTab" class="tab-content">
+          <div class="json-actions">
+            <button id="applyJsonBtn" class="small-btn">Apply JSON</button>
+            <button id="formatJsonBtn" class="small-btn">Format</button>
+          </div>
+          <textarea id="jsonEditor" spellcheck="false"></textarea>
+          <div id="jsonError" class="json-error"></div>
+        </section>
+      </aside>
+    </main>
+
+    <nav class="mobile-nav">
+      <button data-mobile-tab="toolbox">＋<span>Elements</span></button>
+      <button data-mobile-tab="hierarchy">☷<span>Tree</span></button>
+      <button data-mobile-tab="canvas" class="active">□<span>Canvas</span></button>
+      <button data-mobile-tab="properties">⚙<span>Props</span></button>
+      <button data-mobile-tab="json">{}<span>JSON</span></button>
+    </nav>
+
+    <input id="fileInput" type="file" accept=".json,.mcpack,.mcaddon,.jfproject,application/json" hidden>
+    <input id="textureInput" type="file" accept="image/png,image/jpeg,image/webp" hidden>
+    <div id="toast" class="toast"></div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
